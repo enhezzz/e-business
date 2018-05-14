@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <header class="header container">
-      <div class="nav-box clearfix">
+    <header class="header">
+      <div class="nav-box clearfix container">
           <div class="nav-left">
             <div class="item">
               <router-link to="login" class="active">登陆</router-link>
@@ -11,17 +11,47 @@
               </div>
           </div>
           <div class="nav-right">
-            <div class="search-bar">
-              <label for="">
-                <span>搜索：</span>
-                <input type="text" class="search-input">
-              </label>
+            <div class="item">
+              <router-link to="1">
+                ode
+              </router-link>
+            </div>
+            <div class="item">
+              <router-link to="2">
+                ode
+              </router-link>
+            </div>
+            <div class="item">
+              <router-link to="3">
+                ode
+              </router-link>
             </div>
           </div>
       </div>
+      <div class="detail">
+        <div class="logo">
+          logo
+        </div>
+        <div class="search-bar">
+          <div class="search">
+            <input type="text">
+            <button>搜索</button>
+          </div>
+          <div class="hot">
+            <div class="keywords">
+              <router-link to="1">1123</router-link>
+              <router-link to="1">2123</router-link>
+              <router-link to="1">3123</router-link>
+            </div>
+            <div class="more">
+              <router-link to="more">more>></router-link>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
-    <div class="main ">
-       <router-view></router-view>
+    <div class="main">
+       <router-view class="detail"></router-view>
     </div>
     <footer class="footer">
       <div class="nav">
@@ -44,12 +74,13 @@ export default {
 <style>
 #app {
   width: 100%;
+  height: 100%;
 }
 * {
   box-sizing: border-box;
 }
 body {
-  color: #9999CC
+  color: #666
 }
 ul {
   margin: 0;
@@ -58,6 +89,7 @@ ul {
 }
 a {
   text-decoration: none;
+  color: #666
 }
 .clearfix:after{
   content: "";
@@ -68,11 +100,11 @@ a {
   padding: 0 2%
 }
 .header{
-   background: rgb(199, 187, 186);
+   font-size: 12px
 }
 .header .nav-box{
   /* width: 100%; */
-  
+  background: #F5F5F5;
 }
 .header .nav-box  .nav-left{
   float: left;
@@ -97,9 +129,67 @@ a {
 .header .nav-box  .nav-right{
   float: right
 }
-.header .nav-box  .nav-right .search-bar{
+.header .nav-box  .nav-right .item{
+  float: left;
+}
+.header .nav-box  .nav-right .item a{
+  display: block;
+  padding: 0 8px;
   height: 36px;
-  line-height: 36px
+  line-height: 36px;
+  color: #9999CC
+}
+.header .nav-box  .nav-right .item a:hover{
+  color: #9999ee
+}
+.header .detail{
+  display: flex;
+  justify-content: flex-start
+}
+.header .detail .logo{
+  width: 120px;
+  height: 120px;
+  text-align: center;
+  line-height: 120px;
+  margin-left: 4%
+}
+.header .detail .search-bar{
+  flex: 0 1 50%;
+  margin-left: 12%;
+}
+.header .detail .search-bar .search{
+  width: 100%;
+  display: flex;
+  margin-top: 45px
+}
+.header .detail .search-bar .search input{
+  flex:1 1 88%;
+  height: 42px;
+  border-radius: 15px 0 0 15px;
+  outline: none;
+  border: 2px solid #9999ee;
+  padding-left: 5px;
+  align-self: center
+}
+.header .detail .search-bar .search button{
+  height: 42px;
+  flex:1 1 12%;
+  margin:0;
+  border: none;
+  border-radius: 0 15px 15px 0;
+  background: #9999ee
+}
+.header .detail .search-bar .hot {
+  margin-top: 5px
+}
+.header .detail .search-bar .hot .keywords{
+  float: left;
+}
+.header .detail .search-bar .hot .keywords{
+  float: left;
+}
+.header .detail .search-bar .hot .more{
+  float: right;
 }
 /* .container {
   padding: 0 5%;
