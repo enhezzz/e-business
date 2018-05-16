@@ -1,7 +1,8 @@
 <template>
   <div class="category">
     <div class="title">
-      <h2 class="theme">主题市场</h2>
+      <div class="title-box">
+        <h2 class="theme">主题市场</h2>
       <div class="sub">
         <div class="item">
           <router-link to="1">123</router-link>
@@ -25,9 +26,12 @@
           <router-link to="1">123</router-link>
         </div>
       </div>
+      </div>
+      
     </div>
     <div class="detail">
-      <div class="list">
+      <div class="detail-box">
+         <div class="list">
         <div class="type">
           <div class="main-title">
             <router-link to="1">男装</router-link>/
@@ -36,7 +40,6 @@
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
-
           </div>
         </div>
         <div class="type">
@@ -240,11 +243,17 @@
               news:
             </div>
             <div class="prods">
-
+              <ul>
+                <li>
+                  <router-link to="new1">new1</router-link>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
+      </div>
+     
     </div>
   </div>
 </template>
@@ -263,18 +272,26 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .category>.title{
+   background: #9999CC
+}
+.category>.title>.title-box{
   display: flex;
-   background: rgb(153, 153, 238);
+  width:1190px;
+  margin: 0 auto
 }
 .category .title .theme{
-  flex: 0 1 20%;
+  flex: 0 1 206px;
   color: white;
   font-size: 17px;
   font-weight: 600;
-  text-align: center
+  text-align: center;
+  background: rgb(153, 153, 238);
+  margin: 0;
+  height: 47px;
+  line-height: 47px
 }
 .category .title .sub{
-  flex: 0 1 80%;
+  flex: 1;
   display: flex;
   justify-content: flex-start;
   background: #9999CC
@@ -288,11 +305,13 @@ export default {
   line-height: 47px;
   padding: 0 15px
 }
-.category .detail{
+.category .detail .detail-box{
   display: flex;
+  width: 1190px;
+  margin: 0 auto
 }
 .category .detail .list{
-  flex: 0 1 20%;
+  flex: 0 1 206px;
   padding-top: 6px;
   border: 1px solid rgb(153, 153, 238)
 }
@@ -329,9 +348,6 @@ export default {
   width: 100%;
   height: 100%;
   display: block
-}
-.category .detail .hot .advantages .carousel .prod img{
-  /* width: 100%; */
 }
 .category .detail .hot .advantages .carousel .main-controlers{
   position: absolute;

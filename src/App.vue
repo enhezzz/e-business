@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <header class="header">
-      <div class="nav-box clearfix container">
-          <div class="nav-left">
+      <div class="nav-box clearfix">
+        <div class="nav clearfix">
+            <div class="nav-left">
             <div class="item">
-              <router-link to="login" class="active">登陆</router-link>
+              <router-link to="/login" class="active">{{personalInfo.id}}</router-link>
+              
               </div>
             <div class="item">
               <router-link to="/register">注册</router-link>
@@ -13,23 +15,25 @@
           <div class="nav-right">
             <div class="item">
               <router-link to="1">
-                ode
+                我的center
               </router-link>
             </div>
             <div class="item">
               <router-link to="2">
-                ode
+                订单
               </router-link>
             </div>
             <div class="item">
               <router-link to="3">
-                ode
+                收藏
               </router-link>
             </div>
           </div>
+        </div>
       </div>
       <div class="detail">
-        <div class="logo">
+        <div class="detail-box">
+             <div class="logo">
           logo
         </div>
         <div class="search-bar">
@@ -47,6 +51,7 @@
               <router-link to="more">more>></router-link>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </header>
@@ -67,8 +72,16 @@
 
 <script>
 export default {
-  name: "App"
-};
+  name: 'App',
+  computed: {
+    personalInfo: function () {
+      return {
+        id: this.$store.state.id
+      }
+      
+      }
+  }
+}
 </script>
 
 <style>
@@ -103,8 +116,13 @@ a {
    font-size: 12px
 }
 .header .nav-box{
-  /* width: 100%; */
+  width: 100%;
   background: #F5F5F5;
+}
+.header .nav-box .nav{
+   width: 1190px;
+   margin: 0 auto;
+   background: #F5F5F5;
 }
 .header .nav-box  .nav-left{
   float: left;
@@ -142,20 +160,22 @@ a {
 .header .nav-box  .nav-right .item a:hover{
   color: #9999ee
 }
-.header .detail{
+
+.header .detail .detail-box{
+  width:1190px;
   display: flex;
-  justify-content: flex-start
+  justify-content: flex-start;
+  margin: 0 auto
 }
 .header .detail .logo{
   width: 120px;
   height: 120px;
   text-align: center;
   line-height: 120px;
-  margin-left: 4%
 }
 .header .detail .search-bar{
-  flex: 0 1 50%;
-  margin-left: 12%;
+  flex: 0 0 600px;
+  margin-left: 100px;
 }
 .header .detail .search-bar .search{
   width: 100%;
@@ -265,6 +285,6 @@ a {
   background: rgb(61, 123, 160);
 } */
 .router-link-active {
-  background: rgb(61, 123, 160);
+  /* background: rgb(61, 123, 160); */
 }
 </style>
