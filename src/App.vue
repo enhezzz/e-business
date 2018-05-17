@@ -6,7 +6,10 @@
             <div class="nav-left">
             <div class="item">
               <router-link to="/login" class="active">{{personalInfo.id}}</router-link>
-              
+              <div class="simple-info">
+                <div class="avatar"></div>
+                <div class="setup"></div>
+              </div>
               </div>
             <div class="item">
               <router-link to="/register">注册</router-link>
@@ -129,6 +132,19 @@ a {
 }
 .header .nav-box  .nav-left .item{
   float: left;
+  position: relative;
+}
+.header .nav-box  .nav-left .item .simple-info{
+  position: absolute;
+  width: 260px;
+  height: 120px;
+  top: 100%;
+  left: 0;
+  background: #F5F5F5;
+  display: none
+}
+.header .nav-box  .nav-left .item:hover .simple-info{
+  display: block
 }
 .header .nav-box .nav-left .item a{
   display: block;

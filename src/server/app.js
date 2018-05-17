@@ -26,6 +26,7 @@ const express = require('express');
 const app = express();
 const formidable = require('formidable');
 const mongoose = require('mongoose');
+const path = require('path')
 mongoose.connect('mongodb://localhost/busineess').then(res=>{
   console.log('connect database succeed')
 }).catch(err=>{
@@ -33,9 +34,12 @@ mongoose.connect('mongodb://localhost/busineess').then(res=>{
 });
 
 const registerRouter = require('./router/register');
-const loginRouter = require('./router/login')
+const loginRouter = require('./router/login');
+const uploadRouter = require('./router/upload')
 app.use('/',registerRouter);
 app.use('/',loginRouter);
+app.use('/',uploadRouter);
+app.use(express.static(path.resolve(__dirname,'../../')));
 // app.post('/register',(req,res)=>{
 //   let form = new formidable.IncomingForm();
 //   let accountSchema = new mongoose.Schema({
