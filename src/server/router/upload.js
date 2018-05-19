@@ -5,7 +5,7 @@ const router = express.Router();
 router.post('/upload',(req,res)=>{
     let form = new formidable.IncomingForm();
     form.encoding = 'utf-8';
-    form.uploadDir = path.resolve(__dirname,'../../../upload');
+    form.uploadDir = path.resolve(__dirname,'../../../upload/descPics');
     form.keepExtensions = true;
     // form.on('file', function(name, file) {
     //     console.log(name)
@@ -16,8 +16,8 @@ router.post('/upload',(req,res)=>{
         Object.keys(files).forEach(function(name,i){
         imgSrc.push(files[name].path.match(/\\upload[\w\S]*/)[0].replace(/\\/g,"/"))
         })
-        console.log(files)
-        console.log(imgSrc)
+        // console.log(files)
+        // console.log(imgSrc)
         res.json({
             "errno": 0,
             "data": imgSrc

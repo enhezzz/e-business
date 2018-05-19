@@ -1,6 +1,6 @@
 const express = require('express');
 const formidable = require('formidable');
-const model = require('../../collections/register')
+const model = require('../collections/register')
 const router = express.Router();
 router.post('/login',(req,res)=>{
     let form = new formidable.IncomingForm();

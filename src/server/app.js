@@ -35,10 +35,12 @@ mongoose.connect('mongodb://localhost/busineess').then(res=>{
 
 const registerRouter = require('./router/register');
 const loginRouter = require('./router/login');
-const uploadRouter = require('./router/upload')
+const uploadRouter = require('./router/upload');
+const productRouter = require('./router/product');
 app.use('/',registerRouter);
 app.use('/',loginRouter);
 app.use('/',uploadRouter);
+app.use('/',productRouter);
 app.use(express.static(path.resolve(__dirname,'../../')));
 // app.post('/register',(req,res)=>{
 //   let form = new formidable.IncomingForm();
