@@ -29,9 +29,10 @@ export default {
   methods: {
     doregister: function(event) {
       let formData = new FormData(),
-        username = document.querySelector(".regist .input-box #username"),
-        password = document.querySelector(".regist .input-box #password"),
-        submit = document.querySelector(".regist .input-box .doregister");
+        username = document.querySelector(".register .input-box #username"),
+        password = document.querySelector(".register .input-box #password"),
+        submit = document.querySelector(".register .input-box .doregister");
+      
       event = event || window.event;
       if (event.preventDefault) event.preventDefault();
       else event.returnValue = false;

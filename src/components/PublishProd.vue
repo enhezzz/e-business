@@ -8,7 +8,7 @@
         </div>
         <div class="manager-main">
             <h3 class="title">1.宝贝基本信息</h3>
-            <form action="" @submit.prevent="publishProd">
+            <form  @submit.prevent="publishProd" name="p_form">
                 <div class="input-box">
                     <label for="p_name">宝贝标题：</label>
                     <input type="text" name="p_name" id="p_name">
@@ -21,7 +21,10 @@
                                 品牌
                             </div>
                             <div class="content">
-                                <input type="text">
+                                <input type="text" id="cloth_brand" name="p_brand" @focus="selectBrand">
+                                <div class="optional-input">
+                                    <div class="item" v-for="brand of brands">{{brand}}</div>
+                                </div>
                             </div>
                         </div>
                         <div class="input-group clearfix">
@@ -29,7 +32,7 @@
                                 风格
                             </div>
                             <div class="content">
-                                <input type="text">
+                                <input type="text" id="cloth_style" name="p_style">
                             </div>
                         </div>
                     </div>
@@ -39,19 +42,19 @@
                     <div class="pic-box">
                         <div class="pics">
                             <div class="pic">
-                                <input type="file" class="file-input">
+                                <input type="file" class="file-input" name="p_pic1">
                                 <img  alt="" @click.self="selectionPic">
                             </div>
                             <div class="pic">
-                                <input type="file" class="file-input">
+                                <input type="file" class="file-input" name="p_pic2">
                                 <img  alt="" @click.self="selectionPic">
                             </div>
                             <div class="pic">
-                                <input type="file" class="file-input">
+                                <input type="file" class="file-input" name="p_pic3">
                                 <img  alt="" @click.self="selectionPic">
                             </div>
                             <div class="pic">
-                                <input type="file" class="file-input">
+                                <input type="file" class="file-input" name="p_pic4">
                                 <img  alt="" @click.self="selectionPic">
                             </div>
                         </div>
@@ -63,11 +66,12 @@
                         <div id="editor">
                              <p>宝贝描述...</p>
                         </div>
+                        <textarea name="p_desc" id="sync_editor" cols="30" rows="10">1</textarea>
                     </div>
                 </div>
                 <div class="input-box">
                     <div id="submit_box">
-                        <input type="submit" value=发布>
+                        <input type="submit" value="发布">
                     </div>
                     
                 </div>
@@ -81,14 +85,25 @@
 
 <script>
 export default {
+    data () {
+        return {
+            brands: []      
+        }
+    },
     mounted () {
         // var script=document.createElement("script");
         // script.src = '/static/wangEditor.min.js';
         // document.querySelector('body').append(script)
         var E = window.wangEditor;
         var editor2 = new E('#editor');
-        editor2.customConfig.uploadImgServer = '/upload'
+        editor2.customConfig.uploadImgServer = '/upload';
+        editor2.customConfig.onchange = function (html) {
+            // 监控变化，同步更新到 textarea
+            sync_editor.value = html;
+        }
         editor2.create();
+        let sync_editor = document.querySelector('#sync_editor');
+        sync_editor.value = editor2.txt.html();
         // document.querySelector('.pic').addEventListener('click',function(){
         //     this.children[0].click();
         //     this.children[0].addEventListener('change',function(){
@@ -114,11 +129,23 @@ export default {
             })
         },
         publishProd(event){
-            console.log(this)
             console.log(event.target)
-            console.log(event.target.value)
-            console.log(event.target.data)
-            console.log(event.target.resule)
+           let formData = new FormData(event.target);
+            if(fetch){
+                fetch('/product',{
+                    method:'post',
+                    body: formData
+                });
+            }
+        },
+        selectBrand(event){
+            if(fetch){
+                fetch('/admin/brand').then(response=>{
+                    response.text().then(brands=>{
+                        this.brands = JSON.parse(brands);
+                    })
+                })
+            }
         }
     }
 };
@@ -185,6 +212,19 @@ export default {
     text-align: left;
     float: left;
 }
+.prod-manager .manager-main .input-box .input-group .content .optional-input{
+    width: 100%;
+}
+.prod-manager .manager-main .input-box .input-group .content .optional-input .item:nth-child(2n){
+    width: 100%;
+    height: 20px;
+    background: rgb(230, 230, 230)
+}
+.prod-manager .manager-main .input-box .input-group .content .optional-input .item:nth-child(2n+1){
+    width: 100%;
+    height: 20px;
+    background: rgb(255, 255, 255)
+}
 .prod-manager .manager-main .input-box .pic-box .pics{
     margin-left: 80px;
     display: flex;
@@ -208,6 +248,9 @@ export default {
 .prod-manager .manager-main .input-box .editor-box #editor{
    margin-left: 80px;
    width: 720px
+}
+.prod-manager .manager-main .input-box .editor-box #sync_editor{
+    display: none
 }
 
 </style>
