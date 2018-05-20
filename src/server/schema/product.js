@@ -13,5 +13,13 @@ module.exports = {
     },
     "p_pics":[{
         type:String
-    }]
+    }],
+    "p_price": {
+        type: Number,
+        default: 0
+    },
+    "p_num": {
+        type: Number,
+        default: 0
+    }
 }
