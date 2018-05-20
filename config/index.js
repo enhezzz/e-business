@@ -11,7 +11,16 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/**': 'http://localhost',
+      // '/admin/**': 'http://localhost',
+      // '/product'
+      '/**': {
+        target: 'http://localhost',
+        bypass: function(req,res,proxyOptions){
+          if(req.headers.accept.indexOf('html')!==-1){
+            return '/index.html'
+          }
+        }
+      }
     },
 
     // Various Dev Server settings
