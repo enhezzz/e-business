@@ -65,5 +65,13 @@ router.get('/admin/brand',(req,res)=>{
         // console.log(JSON.stringify(brands));
         res.send(JSON.stringify(brands)).end();
     })
+}),
+router.get('/product/:id',(req,res)=>{
+    let p_id = req.params.id;
+    productModel.findOne({_id: p_id},function(err,prod){
+        if(err) throw err;
+        console.log(prod)
+        res.status(200).header('Content-Type','application/json').send(prod).end()
+    })
 })
 module.exports = router;
