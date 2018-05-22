@@ -6,12 +6,12 @@
                     <div class="show">
                         <div class="big-pic">
                             <a href="">
-                                <img src="" alt="">
+                                <img :src="product.base.show.pics[bigIndex]" alt="">
                             </a>
                         </div>
                         <div class="small-pic">
-                            <div class="pic" v-for="pic of product.base.show.pics">
-                                <a href="">
+                            <div class="pic" v-for="pic,index of product.base.show.pics">
+                                <a href=""  :data-index="index" @click.prevent="togglePic">
                                     <img :src="pic" alt="">
                                 </a>
                             </div>
@@ -30,7 +30,7 @@
                     <h3 class="title">asdsa</h3>
                     <div class="record clearfix">
                         <div class="price-info">
-                            价格：<span class="price">$148</span>
+                            价格：<span class="price">{{'$'+product.base.info.price}}</span>
                         </div>
                         <div class="result">
                             <div class="comment">
@@ -63,8 +63,8 @@
                     </div>
                 </div>
                 <div class="content">
-                    <div class="prod-detail" v-html="product.detail.content"></div>
-                    <div class="comment">2</div>
+                    <div class="prod-detail" v-html="product.detail.content"  :class="{isShow: product.detail.nav.selected}"></div>
+                    <div class="comment" :class="{isShow: !product.detail.nav.selected}">2</div>
                 </div>
             </div>
         </div>
@@ -82,6 +82,7 @@ export default {
             product:{
                 base: {
                     show: {
+                        ['big-index']: 0,
                         pics: []
                     },
                     info: {
@@ -100,7 +101,8 @@ export default {
                     comment: ''
                 }
             },
-            buyNum: 1
+            buyNum: 1,
+            bigIndex: 0     //大照片index
         }
     },
     created(){
@@ -127,8 +129,10 @@ export default {
     methods: {
         selectedItem(event){
             event = event||window.event;
-            if(!event.target.parentNode.classList.contains('selected'))
-            this.product.detail.nav.selected = !this.product.detail.nav.selected;
+            if(!event.target.parentNode.classList.contains('selected')){
+                this.product.detail.nav.selected = !this.product.detail.nav.selected;
+            }
+            
         },
         addNum(){
             this.buyNum++;
@@ -136,6 +140,11 @@ export default {
         subNum(){
             if(this.buyNum>1)
             this.buyNum--;
+        },
+        togglePic(event){
+            event = event || window.event;
+            this.bigIndex = event.currentTarget.dataset.index;
+            // console.log(event.currentTarget)
         }
     }
 };
@@ -150,7 +159,8 @@ export default {
   margin: 0 auto;
 }
 .product-box .buy-cart-box {
-  position: absolute;
+  position: fixed;
+  bottom: 0;
   width: 100%;
   height: 40px;
   background: rgb(245, 245, 245);
@@ -158,6 +168,7 @@ export default {
 .product-box .buy-cart-box .buy-cart {
   background: rgb(245, 245, 245);
   width: 1190px;
+  height: 100%;
 }
 .product-box .product .base {
   display: flex;
@@ -168,14 +179,15 @@ export default {
 .product-box .product .base .show-box {
   width: 450px;
   height: 620px;
-  
+  margin-right: 38px
 }
 .product-box .product .base .show-box .show{
   width: 100%;
   height: 100%;
 }
 .product-box .product .base .show-box .show .big-pic{
-  height: 60%;
+  height: 75%;
+  margin-bottom: 50px
 }
 .product-box .product .base .show-box .show .big-pic a{
   display: block;
@@ -195,6 +207,11 @@ export default {
   height: 50px;
   border: 1px solid rgb(210, 210, 210);
   margin-right: 15px
+}
+.product-box .product .base .show-box .show .small-pic .pic a{
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .product-box .product .base .show-box .show .small-pic .pic img{
   width: 100%;
@@ -272,5 +289,11 @@ export default {
 }
 .product-box .product .detail .content>.comment{
     display: none
+}
+.product-box .product .detail .content>.prod-detail{
+    display: none
+}
+.product-box .product .detail .content>.isShow{
+    display: block
 }
 </style>
