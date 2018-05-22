@@ -27,6 +27,8 @@ const app = express();
 const formidable = require('formidable');
 const mongoose = require('mongoose');
 const path = require('path')
+const fs = require('fs');
+// const history = require('connect-history-api-fallback');
 mongoose.connect('mongodb://localhost/busineess').then(res=>{
   console.log('connect database succeed')
 }).catch(err=>{
@@ -42,29 +44,18 @@ app.use('/',loginRouter);
 app.use('/',uploadRouter);
 app.use('/',productRouter);
 app.use(express.static(path.resolve(__dirname,'../../')));
-// app.post('/register',(req,res)=>{
-//   let form = new formidable.IncomingForm();
-//   let accountSchema = new mongoose.Schema({
-//     username:{
-//       type: String,
-//       require: true
-//     },
-//     password:{
-//       type: String,
-//       require:true
+// app.use((req,res)=>{
+//   fs.readFile(path.resolve(__dirname,'../../index.html'), 'utf-8', (err, content) => {
+//     if (err) {
+//       console.log('We cannot open "index.htm" file.')
 //     }
-//   },{collection: 'account'});
-//   let accountModel = db.model('account',accountSchema);
-//   form.parse(req, function(err, fields, files) {
-//     let user = new accountModel(fields);
-//     user.save(function(){
-//       console.log('register succeed')
-//     })
-//    console.log(fields)
-//   });
-//   res.status(200);
-//   res.end()
-// });
+//     res.status(200).header('Content-Type','text/html;charset=utf-8').send(content).end()
+// })
+// }
+// )
+// app.use((req,res)=>{
+//   res.status(404).end();
+// })
 app.listen(80,'localhost',function(){
   console.log('listening...')
 })
