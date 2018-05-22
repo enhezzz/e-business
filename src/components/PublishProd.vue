@@ -35,6 +35,30 @@
                                 <input type="text" id="cloth_style" name="p_style">
                             </div>
                         </div>
+                        <div class="input-group clearfix">
+                            <div class="title">
+                                价格
+                            </div>
+                            <div class="content">
+                                <input type="text" name="p_price">
+                            </div>
+                        </div>
+                        <div class="input-group clearfix">
+                            <div class="title">
+                                库存
+                            </div>
+                            <div class="content">
+                                <input type="text"  name="p_num">
+                            </div>
+                        </div>
+                        <div class="input-group clearfix">
+                            <div class="title">
+                                类别
+                            </div>
+                            <div class="content">
+                                <input type="text"  name="p_type">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="input-box">
@@ -201,6 +225,7 @@ export default {
 }
 .prod-manager .manager-main .input-box .input-group{
    float: left;
+   margin-bottom: 15px
 }
 .prod-manager .manager-main .input-box .input-group .title{
     width: 100px;
