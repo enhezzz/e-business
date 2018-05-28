@@ -73,5 +73,11 @@ router.get('/product/:id',(req,res)=>{
         console.log(prod)
         res.status(200).header('Content-Type','application/json').send(prod).end()
     })
+});
+router.get('/newProds',(req,res)=>{
+    productModel.find().sort({p_date: -1}).select('_id p_name').limit(10).exec((err,prods)=>{
+        console.log(prods);
+        res.json(prods).status(200).end()
+    })
 })
 module.exports = router;

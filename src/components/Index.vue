@@ -244,8 +244,8 @@
             </div>
             <div class="prods">
               <ul>
-                <li>
-                  <router-link to="new1">new1</router-link>
+                <li v-for="(p,index) of news">
+                  <router-link :to="'/product/'+p._id">{{index+1+':'+p.p_name}}</router-link>
                 </li>
               </ul>
             </div>
@@ -263,8 +263,22 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App"
+      msg: "Welcome to Your Vue.js App",
+      news: []
     };
+  },
+  created: function(){
+    if(fetch){
+      fetch('/newProds',{
+        method: 'get'
+      }).then(response=>{
+        return response.json();
+      }).then(news=>{
+        this.news = news
+      }).catch(err=>{
+        if(err) throw err;
+      })
+    }
   }
 };
 </script>

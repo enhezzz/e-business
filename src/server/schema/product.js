@@ -21,5 +21,9 @@ module.exports = {
     "p_num": {
         type: Number,
         default: 0
+    },
+    "p_date": {
+        type: Date,
+        default: new Date()
     }
 }
