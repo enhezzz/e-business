@@ -21,9 +21,9 @@
                                 品牌
                             </div>
                             <div class="content">
-                                <input type="text" id="cloth_brand" name="p_brand" @focus="selectBrand">
+                                <input type="text" id="cloth_brand" name="p_brand" @focus="focusBrand" @blur="blurBrand" :value="brand">
                                 <div class="optional-input">
-                                    <div class="item" v-for="brand of brands">{{brand}}</div>
+                                    <div class="item" v-for="brand of brands" @click="selectBrand">{{brand}}</div>
                                 </div>
                             </div>
                         </div>
@@ -109,9 +109,18 @@
 
 <script>
 export default {
+    beforeRouteEnter (to, from, next) {
+    next(vm => {
+        console.log(vm.$store.state.auth)
+        if(!vm.$store.state.auth)
+        next({path: '/errorAccess'});
+  })
+  },
     data () {
         return {
-            brands: []      
+            brands: [],
+            first: true,  //判断是否是第一次选择
+            brand: ''      
         }
     },
     mounted () {
@@ -162,14 +171,27 @@ export default {
                 });
             }
         },
-        selectBrand(event){
-            if(fetch){
+        focusBrand(event){
+            event = event || window.event;
+            if(fetch&&this.first){
                 fetch('/admin/brand').then(response=>{
                     response.text().then(brands=>{
                         this.brands = JSON.parse(brands);
+                        this.first = false
                     })
                 })
             }
+            event.target.nextElementSibling.style.display = "block";
+        },
+        blurBrand(event){
+            event = event || window.event;
+            setTimeout(() => {
+                event.target.nextElementSibling.style.display = "none";
+            }, 200);
+        },
+        selectBrand(event){
+            event = event || window.event;
+            this.brand = event.target.innerText;
         }
     }
 };
@@ -225,7 +247,7 @@ export default {
 }
 .prod-manager .manager-main .input-box .input-group{
    float: left;
-   margin-bottom: 15px
+   margin-bottom: 15px；
 }
 .prod-manager .manager-main .input-box .input-group .title{
     width: 100px;
@@ -236,9 +258,14 @@ export default {
     width: 230px;
     text-align: left;
     float: left;
+    position: relative;
 }
 .prod-manager .manager-main .input-box .input-group .content .optional-input{
     width: 100%;
+    position: absolute;
+    height: 80px;
+    overflow-y: auto;
+    z-index: 3;
 }
 .prod-manager .manager-main .input-box .input-group .content .optional-input .item:nth-child(2n){
     width: 100%;
