@@ -7,6 +7,7 @@ const model = require('../collections/register')
 router.post('/register',(req,res)=>{
     let form = new formidable.IncomingForm();
     form.parse(req, function(err, fields, files) {
+      fields.auth = 0;
       let user = new model(fields);
       user.save(function(){
         console.log('register succeed')

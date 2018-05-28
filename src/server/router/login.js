@@ -8,7 +8,8 @@ router.post('/login',(req,res)=>{
      model.findOne(fields).then(user=>{
         if(user){
             res.status(200).header('Content-Type','application/json').json({
-                username: user['username']
+                username: user['username'],
+                auth: user["auth"]
             }).end();
         }
      }).catch(err=>{
