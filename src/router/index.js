@@ -5,9 +5,10 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import PublishProd from '@/components/PublishProd'
 import Product from '@/components/Product'
+import ErrorAccess from '@/components/ErrorAccess'
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -34,6 +35,14 @@ export default new Router({
       path: '/product/:id',
       name: 'product',
       component: Product
+    },
+    {
+      path: '/errorAccess',
+      name: 'errorAccess',
+      component: ErrorAccess
     }
   ]
 })
+
+
+export default router;
