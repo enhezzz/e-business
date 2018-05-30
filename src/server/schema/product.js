@@ -23,7 +23,6 @@ module.exports = {
         default: 0
     },
     "p_date": {
-        type: Date,
-        default: new Date()
+        type: Date
     }
 }
