@@ -6,6 +6,7 @@ import Register from '@/components/Register'
 import PublishProd from '@/components/PublishProd'
 import Product from '@/components/Product'
 import ErrorAccess from '@/components/ErrorAccess'
+import ProductList from '@/components/ProductList'
 Vue.use(Router)
 
 const router = new Router({
@@ -40,6 +41,11 @@ const router = new Router({
       path: '/errorAccess',
       name: 'errorAccess',
       component: ErrorAccess
+    },
+    {
+      path: '/productList',
+      name: 'productList',
+      component: ProductList
     }
   ]
 })
