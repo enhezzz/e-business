@@ -10,5 +10,9 @@ module.exports = {
     auth:{
       type: Number,
       required: true
+    },
+    addrs:{
+      type: Array,
+      default: []
     }
   }
