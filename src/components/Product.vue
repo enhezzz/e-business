@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="info">
-                    <h3 class="title">asdsa</h3>
+                    <h3 class="title">{{product.base.info.title}}</h3>
                     <div class="record clearfix">
                         <div class="price-info">
                             价格：<span class="price">{{'$'+product.base.info.price}}</span>
@@ -48,7 +48,7 @@
                         <button class="add" @click="addNum">+</button>
                     </div>
                     <div class="opera">
-                        <button>立即购买</button>
+                        <button @click="buynow">立即购买</button>
                         <button>加入购物车</button>
                     </div>
                 </div>
@@ -145,11 +145,23 @@ export default {
             event = event || window.event;
             this.bigIndex = event.currentTarget.dataset.index;
             // console.log(event.currentTarget)
+        },
+        buynow: function(){
+            if(this.$store.state.id == '登陆'){
+                this.$router.push({name: 'login'});
+            }else{
+                console.log(this.$route)
+                this.$store.commit('setProdName',this.product.base.info.title);
+                this.$store.commit('setProdSum',this.buyNum);
+                this.$store.commit('setProdPrice',this.product.base.info.price);
+                let currentFullpath = this.$route.fullPath;
+                this.$router.push({path: currentFullpath+'/order'});
+            }
         }
     }
 };
 </script>
-<style>
+<style scoped>
 .product-box {
   position: relative;
   font-size: 12px
