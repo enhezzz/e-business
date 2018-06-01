@@ -28,6 +28,8 @@ const formidable = require('formidable');
 const mongoose = require('mongoose');
 const path = require('path')
 const fs = require('fs');
+var session = require('express-session');
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 6000000 }}))
 // const history = require('connect-history-api-fallback');
 mongoose.connect('mongodb://localhost/busineess').then(res=>{
   console.log('connect database succeed')
@@ -39,11 +41,14 @@ const registerRouter = require('./router/register');
 const loginRouter = require('./router/login');
 const uploadRouter = require('./router/upload');
 const productRouter = require('./router/product');
+const personalCenter = require('./router/personalCenter')
 app.use('/',registerRouter);
 app.use('/',loginRouter);
 app.use('/',uploadRouter);
 app.use('/',productRouter);
+app.use('/personalCenter',personalCenter);
 app.use(express.static(path.resolve(__dirname,'../../')));
+
 // app.use((req,res)=>{
 //   fs.readFile(path.resolve(__dirname,'../../index.html'), 'utf-8', (err, content) => {
 //     if (err) {
