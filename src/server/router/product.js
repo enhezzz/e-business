@@ -71,37 +71,31 @@ router.get('/admin/brand', (req, res) => {
         let p_id = req.params.id;
         productModel.findOne({ _id: p_id }, function (err, prod) {
             if (err) throw err;
-            console.log(prod)
             res.status(200).header('Content-Type', 'application/json').send(prod).end()
         })
     });
 router.get('/newProds', (req, res) => {
     productModel.find().sort({ p_date: -1 }).select('_id p_name').limit(10).exec((err, prods) => {
-        console.log(prods);
         res.json(prods).status(200).end()
     })
 });
 router.get('/productList', (req, res) => {
     if (req.query.p_keyword) {
-        console.log(req.query.p_keyword);
         let p_keyword = req.query.p_keyword;
         let reg = eval('/[\s\S]*'+p_keyword+'[\s\S]*/');
         let pageIndex = parseInt(req.query.page || 1)-1; 
         let pageInfo = {};
-        console.log(p_keyword);
         new Promise((resolve, reject) => {  //验证正则表达式时，在每个字符后面加？
             productModel.find({ p_name:  reg}).skip(pageIndex*12).limit(12).sort('-p_date')
                 .select('_id p_price p_name p_pics')
                 .exec((err, infos) => {
                     if (err) throw err;
                     pageInfo.infos = infos;
-                    console.log(infos)
                     resolve();
                 })
         }).then(()=>{
             return new Promise((resolve,reject)=>{
                 productModel.where({ p_name: new RegExp(p_keyword) }).count().count((err,count)=>{
-                    console.log(count);
                     pageInfo.pageSum = Math.ceil(count/12);
                     resolve()
                 })
@@ -147,5 +141,15 @@ router.get('/productList', (req, res) => {
 
     }
     else res.status(500).end();
+});
+router.get('/order/:id',(req,res)=>{
+    let prodId = req.params.id;
+    productModel.findOne({_id: prodId}).select('p_name p_price').exec((err,prod)=>{
+        if(err) throw err;
+        if(prod){
+            
+            res.json(prod).end();
+        }
+    })
 })
 module.exports = router;
