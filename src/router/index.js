@@ -11,6 +11,7 @@ import Order from '@/components/Order'
 import Store from '@/vuex'  //
 import PersonalCenterIndex from '@/components/personalCenter'
 import Address from '@/components/personalCenter/Address'
+import BaseInfo from '@/components/personalCenter/BaseInfo'
 Vue.use(Router)
 
 const router = new Router({
@@ -65,6 +66,11 @@ const router = new Router({
           path: 'receivedAddr',
           name: 'receivedAddr',
           component: Address
+        },
+        {
+          path: 'baseInfo',
+          name: 'baseInfo',
+          component: BaseInfo
         }
       ]
     }
