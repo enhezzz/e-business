@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const productModel = require('../collections/product');
 const brandModel = require('../collections/p_brand');
 const styleModel = require('../collections/p_style');
+const userModel = require('../collections/register')
 router.post('/product', (req, res) => {
     let form = new formidable.IncomingForm();
     form.encoding = 'utf-8';
@@ -143,13 +144,45 @@ router.get('/productList', (req, res) => {
     else res.status(500).end();
 });
 router.get('/order/:id',(req,res)=>{
-    let prodId = req.params.id;
-    productModel.findOne({_id: prodId}).select('p_name p_price').exec((err,prod)=>{
-        if(err) throw err;
-        if(prod){
-            
-            res.json(prod).end();
-        }
-    })
+    if(req.session._id){
+        let prodId = req.params.id;
+        new Promise((resolve,reject)=>{
+            productModel.findOne({_id: prodId}).select('p_name p_price').exec((err,prod)=>{
+                if(err) throw err;
+                if(prod){
+                    resolve(prod)
+                    // res.json(prod).end();
+                }
+            })
+        }).then(prodInfo=>{
+            return new Promise((resolve,reject)=>{
+                let _id = req.session._id;
+                userModel.findById(_id).select('addrs').exec((err,addrs)=>{
+                    let obj = {
+                        prodInfo: prodInfo,
+                        addrInfo: addrs
+                    };
+                    // Object.assign(obj,prodInfo,doc);                         //失败原因是因为对象被freezon？
+                    // console.log(Object.getOwnPropertyDescriptor(doc,'addrs'))
+                    console.log(obj)
+                    // Object.defineProperty(prodInfo,'addrs',{
+                    //     value: doc.addrs,
+                    //     enumerable: true,
+                    //     configurable: true
+                    // });
+                    // Object.assign(prodInfo,addrs);
+                    resolve(obj)
+                })
+            })
+        }).then(obj=>{
+            res.json(obj).end()
+        }).catch(err=>{
+            if(err) throw err;
+        })
+    }else{
+        res.status(500).end()
+    }
+  
+    
 })
 module.exports = router;

@@ -15,9 +15,9 @@
                     <div class="title">
                         <span>选择收获地址：</span>
                     </div>
-                    <div class="option">
+                    <div class="option" v-for="(addr,index) of receivedAddr" :key="index">
                         <input type="radio" name="receiveAddr" id="">
-                        <div class="name">地址一</div>
+                        <div class="name">{{addr}}</div>
                     </div>
                     <router-link to="/personalCenter/receivedAddr">管理收货地址</router-link>
                 </div>
@@ -62,15 +62,21 @@ export default {
         let prodId = to.params.id;
         if(fetch){
             let request = new Request('/order/'+prodId)
-            fetch(request).then(response=>{
+            fetch(request,{
+                credentials: 'same-origin'
+            }).then(response=>{
                 return response.json()
-            }).then(prodInfo=>{
+            }).then(obj=>{
                 next(vm=>{
-                    vm.prodName = prodInfo.p_name;
-                    vm.prodPrice = prodInfo.p_price;
+                    vm.prodName = obj.prodInfo.p_name;
+                    vm.prodPrice = obj.prodInfo.p_price;
+                    vm.receivedAddr = obj.addrInfo.addrs;
                 })
             }).catch(err=>{
-                if(err) throw err;
+                if(err){
+                    next({name: 'login'})
+                    throw err;
+                }
             })
         }
     },
