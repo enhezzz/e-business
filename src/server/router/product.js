@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 const productModel = require('../collections/product');
 const brandModel = require('../collections/p_brand');
 const styleModel = require('../collections/p_style');
-const userModel = require('../collections/register')
+const userModel = require('../collections/register');
+const cartModel = require('../collections/cart')
 router.post('/product', (req, res) => {
     let form = new formidable.IncomingForm();
     form.encoding = 'utf-8';
@@ -68,13 +69,6 @@ router.get('/admin/brand', (req, res) => {
         res.send(JSON.stringify(brands)).end();
     })
 }),
-    router.get('/product/:id', (req, res) => {
-        let p_id = req.params.id;
-        productModel.findOne({ _id: p_id }, function (err, prod) {
-            if (err) throw err;
-            res.status(200).header('Content-Type', 'application/json').send(prod).end()
-        })
-    });
 router.get('/newProds', (req, res) => {
     productModel.find().sort({ p_date: -1 }).select('_id p_name').limit(10).exec((err, prods) => {
         res.json(prods).status(200).end()
@@ -143,23 +137,23 @@ router.get('/productList', (req, res) => {
     }
     else res.status(500).end();
 });
-router.get('/order/:id',(req,res)=>{
+router.get('/order',(req,res)=>{
     if(req.session._id){
         let prodId = req.params.id;
-        new Promise((resolve,reject)=>{
-            productModel.findOne({_id: prodId}).select('p_name p_price').exec((err,prod)=>{
-                if(err) throw err;
-                if(prod){
-                    resolve(prod)
-                    // res.json(prod).end();
-                }
-            })
-        }).then(prodInfo=>{
-            return new Promise((resolve,reject)=>{
+        // new Promise((resolve,reject)=>{
+        //     productModel.findOne({_id: prodId}).select('p_name p_price').exec((err,prod)=>{
+        //         if(err) throw err;
+        //         if(prod){
+        //             resolve(prod)
+        //             // res.json(prod).end();
+        //         }
+        //     })
+        // }).then(prodInfo=>{
+        //     return 
+            new Promise((resolve,reject)=>{
                 let _id = req.session._id;
                 userModel.findById(_id).select('addrs').exec((err,addrs)=>{
                     let obj = {
-                        prodInfo: prodInfo,
                         addrInfo: addrs
                     };
                     // Object.assign(obj,prodInfo,doc);                         //失败原因是因为对象被freezon？
@@ -174,7 +168,7 @@ router.get('/order/:id',(req,res)=>{
                     resolve(obj)
                 })
             })
-        }).then(obj=>{
+        .then(obj=>{
             res.json(obj).end()
         }).catch(err=>{
             if(err) throw err;
@@ -185,4 +179,48 @@ router.get('/order/:id',(req,res)=>{
   
     
 })
+router.post('/product/cart',(req,res)=>{
+    if(req.session._id){
+        form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields, files) {
+            console.log(fields);
+            cartModel.findOne({userId: req.session._id}).exec((err,cart)=>{
+                let isDifferent =  cart.prodInfo.every((prod)=>{
+                        return prod.prodId != fields.prodId
+                    });
+                console.log(isDifferent);
+                if(cart && isDifferent){
+                    cartModel.findOneAndUpdate({userId: req.session._id},{$push: {prodInfo: fields}}).select('prodInfo').exec((err,cart)=>{
+                        if(err) throw err;
+                        req.session.num_in_cart++;
+                        res.end();
+                    })
+                }else if(!cart){
+                    let cartItem = {
+                        userId: req.session._id,
+                        prodInfo: fields
+                    }
+                    new cartModel(cartItem).save(err=>{
+                        if(err) throw err;
+                        console.log('add to cart succ');
+                        res.end();
+                    })
+                }else{
+                    res.status(502).end();
+                }
+            })
+         
+          
+        })
+    }else{
+        res.status(500).end();
+    }
+})
+router.get('/product/:id', (req, res) => {
+    let p_id = req.params.id;
+    productModel.findOne({ _id: p_id }, function (err, prod) {
+        if (err) throw err;
+        res.status(200).header('Content-Type', 'application/json').send(prod).end()
+    })
+});
 module.exports = router;
