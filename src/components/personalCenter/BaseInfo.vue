@@ -5,7 +5,6 @@
                 <div class="tip" @click="updateAvatar">修改头像</div>
                 <input type="file" class="selectAvatar">
             </div>
-
         </div>
     </div>
 </template>

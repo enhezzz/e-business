@@ -102,7 +102,6 @@ export default {
     updateEditedVal(event,index){
         event = event || window.event;
         let target = event.target || event.srcElement;
-        console.log(index,target.value)
         this.editedVal[index] = target.value;
         // this.editedVal = target.value;
     },
@@ -136,7 +135,6 @@ export default {
                     } 
                 })
             }
-            console.log(this.editedVal[index]);
         }
         
     }
@@ -151,7 +149,7 @@ export default {
   border: 1px solid #ccc;
 }
 .address-info .current-addrs > .addr {
-  border-bottom: 1px solid #eee;
+  /* border-bottom: 1px solid #eee; */
 }
 .address-info .current-addrs > .addr .property{
   border-bottom: 1px solid #eee;
@@ -159,6 +157,7 @@ export default {
 .address-info .current-addrs > .addr .name {
   float: left;
   width: 500px;
+  height: 35px;
   border-right: 1px solid #eee;
 }
 .address-info .current-addrs > .addr .opera {

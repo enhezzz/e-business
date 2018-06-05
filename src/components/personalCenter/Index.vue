@@ -3,10 +3,10 @@
         <div class="center">
             <div class="sider-options">
                 <div class="option">
-                    <router-link to="baseInfo">个人资料</router-link>
+                    <router-link to="/personalCenter/baseInfo">个人资料</router-link>
                 </div>
                 <div class="option">
-                    <router-link to="receivedAddr">管理收货地址</router-link>
+                    <router-link to="/personalCenter/receivedAddr">管理收货地址</router-link>
                 </div>
             </div>
             <div class="main-content">
@@ -17,7 +17,13 @@
 </template>
 <script>
 export default {
-    
+    beforeRouteEnter(to, from, next)  {
+      next(vm=>{
+          if(vm.$store.state.id == '登陆'){
+              vm.$router.replace({name: 'login'})
+          }
+      })  
+    }
 }
 </script>
 <style scoped>
