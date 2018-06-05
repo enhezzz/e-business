@@ -2,13 +2,14 @@
     <div class="order-box">
         <div class="order">
             <div class="center">
-                <div class="prod clearfix">
-                    <h3 class="title">{{prodName}}</h3>
+                <div class="prod clearfix" v-for="(prod,index) of prods" :key="index">
+                    <h3 class="title">{{prod.prodName}}</h3>
+                    <div class="store-num" style="float:left;width:100%">{{'库存:'+prod.prodNum}}</div>
                     <div class="mountManager">
                         <span>总数：</span>
-                        <button @click="substract">-</button>
-                        <input type="text" :value="prodSum">
-                        <button @click="add">+</button>
+                        <button @click="substract(index)">-</button>
+                        <input type="text" :value="prod.prodSum">
+                        <button @click="add(index)">+</button>
                     </div>
                 </div>
                 <div class="address">
@@ -16,7 +17,7 @@
                         <span>选择收获地址：</span>
                     </div>
                     <div class="option" v-for="(addr,index) of receivedAddr" :key="index">
-                        <input type="radio" name="receiveAddr" id="">
+                        <input type="radio" name="receiveAddr" id="" checked>
                         <div class="name">{{addr}}</div>
                     </div>
                     <router-link to="/personalCenter/receivedAddr">管理收货地址</router-link>
@@ -38,15 +39,21 @@
 export default {
     data: function(){
         return {
-            prodName: '',
-            prodSum: 1,
+            prods: [],
             receivedAddr: [],
-            prodPrice: 0
         }
     },
     computed: {
-        sumPrice(){
-            return this.prodPrice*this.prodSum;
+        sumPrice: {
+            get: function(){
+                return this.prods.reduce((prevProd,nextProd)=>{
+                    return prevProd.prodSum * prevProd.prodPrice + nextProd.prodSum*nextProd.prodPrice;
+                },{
+                    prodSum: 0,
+                    prodPrice: 0
+                });
+                return this.prods[0].prodSum
+            }
         }
     }
     ,
@@ -55,22 +62,25 @@ export default {
         // this.prodName = this.$store.state.order.prodName;
         // this.prodSum = this.$store.state.order.prodSum;
         // this.prodPrice = this.$store.state.order.prodPrice*this.$store.state.order.prodSum;
-        
+        this.prods = JSON.parse(sessionStorage.order);JSON.parse(sessionStorage.order);
     },
     beforeRouteEnter(to,from,next){
-        console.log(to.params.id);
-        let prodId = to.params.id;
+        // console.log(to.params.id);
+        // console.log(from.params.id)
+       
+        // let prodId = from.params.id;
         if(fetch){
-            let request = new Request('/order/'+prodId)
+            let request = new Request('/order')
             fetch(request,{
                 credentials: 'same-origin'
             }).then(response=>{
                 return response.json()
             }).then(obj=>{
                 next(vm=>{
-                    vm.prodName = obj.prodInfo.p_name;
-                    vm.prodPrice = obj.prodInfo.p_price;
+                    // vm.prodName = obj.prodInfo.p_name;
+                    // vm.prodPrice = obj.prodInfo.p_price;
                     vm.receivedAddr = obj.addrInfo.addrs;
+                    next()
                 })
             }).catch(err=>{
                 if(err){
@@ -79,15 +89,17 @@ export default {
                 }
             })
         }
+        
     },
     methods: {
-        substract(){
-            if(this.prodSum>1){
-                this.prodSum--;
+        substract(index){
+            if(this.prods[index].prodSum>1){
+                this.prods[index].prodSum--;
             }
         },
-        add(){
-            this.prodSum = this.prodSum+1
+        add(index){
+            if(this.prods[index].prodSum<this.prods[index].prodNum)
+            this.prods[index].prodSum =this.prods[index].prodSum+1
         }
     }
 }
