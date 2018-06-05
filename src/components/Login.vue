@@ -18,7 +18,7 @@
                 </div>
             </form>
             <div class="helper">
-
+                <router-link to="/admin">admin</router-link>
             </div>
         </div>
         </div>
@@ -38,9 +38,17 @@ export default {
             xhr.onreadystatechange = ()=>{
                 if(xhr.status == 200 && xhr.readyState == 4){
                     this.$store.commit('updateUsername',this.transformResponseText(xhr.responseText).username);
+                    this.$store.commit('updateAuth',this.transformResponseText(xhr.responseText).auth);
+                    this.$store.commit('turnToLogin');
+                    this.$store.commit('update_num_in_cart',this.transformResponseText(xhr.responseText).num_in_cart)
+                    this.$router.push({name: 'index'})
                 }
             }
-            xhr.send(formData)
+            xhr.send(formData);
+            xhr.onprogress = function(event){
+                console.log(event.loaded)
+                console.log(event.total)
+            }
         },
         transformResponseText(responseText){ //parse 响应数据
             return JSON.parse(responseText);
