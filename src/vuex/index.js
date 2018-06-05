@@ -25,6 +25,8 @@ export default new Vuex.Store({
     state:{
         id: '登陆',
         auth: 0,
+        isLogin: false,
+        num_in_cart: undefined
     },
     mutations:{
         updateUsername(state,id){
@@ -32,6 +34,15 @@ export default new Vuex.Store({
         },
         updateAuth(state,auth){
             state.auth = auth;
+        },
+        turnToLogin(state){
+            state.isLogin = true;
+        },
+        add_num_in_cart(state){
+            state.num_in_cart++;
+        },
+        update_num_in_cart(state,num){
+            state.num_in_cart = num
         }
     }
 })

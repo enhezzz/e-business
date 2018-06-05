@@ -38,6 +38,11 @@ const router = new Router({
       component: PublishProd
     },
     {
+      path: '/product/order',
+      name: 'order',
+      component: Order
+    },
+    {
       path: '/product/:id',
       name: 'product',
       component: Product,
@@ -51,11 +56,6 @@ const router = new Router({
       path: '/productList',
       name: 'productList',
       component: ProductList
-    },
-    {
-      path: '/product/:id/order',
-      name: 'order',
-      component: Order
     },
     {
       path: '/personalCenter',
@@ -86,12 +86,18 @@ router.beforeEach ((to, from,next) => {
       }).then(response=>{
         return response.json();
       }).then(sessionInfo=>{
-        let username = sessionInfo.id || '登陆';
+        let username = sessionInfo.id;
+        let auth = sessionInfo.auth;
+        let num_in_cart = sessionInfo.num_in_cart;
         Store.commit('updateUsername',username);
-        Store.commit('updateAuth',sessionInfo.auth);
+        Store.commit('updateAuth',auth);
+        Store.commit('turnToLogin');
+        Store.commit('num_in_cart',num_in_cart);
         next()
       }).catch(err=>{
-        if(err) throw err;
+        if(err){
+          next()
+        }
       })
     }
   }

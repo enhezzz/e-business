@@ -40,6 +40,9 @@
                                 <a href=""><span class="num">1</span><br> 交易成功</a>
                             </div>
                         </div>
+                        <div class="store-num">
+                            {{'库存:'+ product.base.info.num}}
+                        </div>
                     </div>
                     <div class="number">
                         <span>数量</span>
@@ -49,7 +52,7 @@
                     </div>
                     <div class="opera">
                         <button @click="buynow">立即购买</button>
-                        <button>加入购物车</button>
+                        <button @click="toCart">加入购物车</button>
                     </div>
                 </div>
             </div>
@@ -89,7 +92,8 @@ export default {
                         title: '',
                         price: 0,
                         comment: 0,
-                        traded: 0
+                        traded: 0,
+                        num: 0
                     }
                     
                 },
@@ -119,6 +123,7 @@ export default {
                 this.product.base.show.pics = prod.p_pics;
                 this.product.base.info.title = prod.p_name;
                 this.product.base.info.price = prod.p_price;
+                this.product.base.info.num = prod.p_num;
                 this.product.detail.content = prod.p_desc
                 console.log(prod)
             }).catch(e=>{
@@ -135,6 +140,7 @@ export default {
             
         },
         addNum(){
+            if(this.buyNum<this.product.base.info.num)
             this.buyNum++;
         },
         subNum(){
@@ -150,12 +156,50 @@ export default {
             if(this.$store.state.id == '登陆'){
                 this.$router.push({name: 'login'});
             }else{
-                console.log(this.$route)
                 this.$store.commit('setProdName',this.product.base.info.title);
                 this.$store.commit('setProdSum',this.buyNum);
                 this.$store.commit('setProdPrice',this.product.base.info.price);
-                let currentFullpath = this.$route.fullPath;
-                this.$router.push({path: currentFullpath+'/order'});
+                sessionStorage.order = JSON.stringify([{
+                    prodName: this.product.base.info.title,
+                    prodSum: this.buyNum,
+                    prodPrice: this.product.base.info.price,
+                    prodNum: this.product.base.info.num
+                }])
+                // let currentFullpath = this.$route.fullPath;
+                this.$router.push({path: '/product/order'});
+            }
+        },
+        toCart(){
+            if(fetch){
+                let formData = new FormData();
+                let prodId = this.$route.params.id;
+                let prodName = this.product.base.info.title;
+                let prodPrice = this.product.base.info.price;
+                let prodNum = this.product.base.info.num;
+                formData.append('prodId',prodId);
+                formData.append('prodName',prodName);
+                formData.append('prodPrice',prodPrice);
+                formData.append('prodNum',prodNum);
+                let request = new Request('/product/cart');
+                fetch(request,{
+                    method: 'post',
+                    credentials: 'same-origin',
+                    body: formData
+                }).then(response=>{
+                    if(response.status == 500) throw new Error('你还未登陆！！')
+                    if(response.status == 200){
+                        this.$store.commit('add_num_in_cart');
+                    }else if(response.status == 502){
+                        alert('你已经添加过了')
+                    }
+                    return response.text();
+                }).then(prods=>{
+                }).catch(err=>{
+                    if(err){
+                        this.$router.push({name: 'login'});
+                        console.error(err)
+                    }
+                })
             }
         }
     }
@@ -269,6 +313,10 @@ export default {
 }
 .product-box .product .info .record .result>.traded{
    float: left;
+}
+.product-box .product .info .record .store-num{
+   float: left;
+   width: 100%
 }
 .product-box .product .info .number{
    padding: 7px;
