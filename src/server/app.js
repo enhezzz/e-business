@@ -47,7 +47,9 @@ app.use('/',loginRouter);
 app.use('/',uploadRouter);
 app.use('/',productRouter);
 app.use('/personalCenter',personalCenter);
-app.use(express.static(path.resolve(__dirname,'../../')));
+app.use(express.static(path.resolve(__dirname,'../../'),{
+  maxAge: 666666
+}));
 
 // app.use((req,res)=>{
 //   fs.readFile(path.resolve(__dirname,'../../index.html'), 'utf-8', (err, content) => {
