@@ -12,6 +12,7 @@ import Store from '@/vuex'  //
 import PersonalCenterIndex from '@/components/personalCenter'
 import Address from '@/components/personalCenter/Address'
 import BaseInfo from '@/components/personalCenter/BaseInfo'
+import Cart from '@/components/buyCart'
 Vue.use(Router)
 
 const router = new Router({
@@ -43,6 +44,11 @@ const router = new Router({
       component: Order
     },
     {
+      path: '/product/cart',
+      name: 'cart',
+      component: Cart
+    },
+    {
       path: '/product/:id',
       name: 'product',
       component: Product,
@@ -63,14 +69,14 @@ const router = new Router({
       component: PersonalCenterIndex,
       children: [
         {
+          path: '',
+          name: 'baseInfo',
+          component: BaseInfo
+        },
+        {
           path: 'receivedAddr',
           name: 'receivedAddr',
           component: Address
-        },
-        {
-          path: 'baseInfo',
-          name: 'baseInfo',
-          component: BaseInfo
         }
       ]
     }
@@ -84,6 +90,9 @@ router.beforeEach ((to, from,next) => {
       fetch(request,{
         credentials: 'same-origin'
       }).then(response=>{
+        if(response.status == 500){
+          throw new Error('你还未登陆')
+        }
         return response.json();
       }).then(sessionInfo=>{
         let username = sessionInfo.id;
@@ -92,11 +101,11 @@ router.beforeEach ((to, from,next) => {
         Store.commit('updateUsername',username);
         Store.commit('updateAuth',auth);
         Store.commit('turnToLogin');
-        Store.commit('num_in_cart',num_in_cart);
+        Store.commit('update_num_in_cart',num_in_cart);
         next()
       }).catch(err=>{
         if(err){
-          next()
+          next();
         }
       })
     }

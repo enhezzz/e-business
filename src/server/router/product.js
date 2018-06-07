@@ -185,11 +185,13 @@ router.post('/product/cart',(req,res)=>{
         form.parse(req, function (err, fields, files) {
             console.log(fields);
             cartModel.findOne({userId: req.session._id}).exec((err,cart)=>{
-                let isDifferent =  cart.prodInfo.every((prod)=>{
+                let isDifferent = false;
+                if(cart){
+                    isDifferent =  cart.prodInfo.every((prod)=>{
                         return prod.prodId != fields.prodId
                     });
-                console.log(isDifferent);
-                if(cart && isDifferent){
+                }
+                if(isDifferent){
                     cartModel.findOneAndUpdate({userId: req.session._id},{$push: {prodInfo: fields}}).select('prodInfo').exec((err,cart)=>{
                         if(err) throw err;
                         req.session.num_in_cart++;
@@ -214,6 +216,22 @@ router.post('/product/cart',(req,res)=>{
         })
     }else{
         res.status(500).end();
+    }
+});
+router.get('/product/cart',(req,res)=>{
+    if(req.session._id){
+        let userId = req.session._id;
+        cartModel.findOne({userId: userId}).select('prodInfo').exec((err,prod)=>{
+            let responseObj = {};
+            console.log(prod,err)
+            if(!prod || err){
+                responseObj.prodInfo = [];
+            }else
+            responseObj.prodInfo = prod.prodInfo;
+            res.json(responseObj).end();
+        })
+    }else{
+        res.status(500).end()
     }
 })
 router.get('/product/:id', (req, res) => {
