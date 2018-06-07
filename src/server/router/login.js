@@ -32,9 +32,14 @@ router.post('/login',(req,res)=>{
         }).then(userInfo=>{
             return new Promise((resolve,reject)=>{
                 cartModel.findOne({userId: req.session._id}).select('prodInfo').exec((err,cart)=>{
-                
-                        userInfo.num_in_cart = cart.prodInfo.length;
-                        req.session.num_in_cart = cart.prodInfo.length;
+                        if(cart){
+                            userInfo.num_in_cart = cart.prodInfo.length;
+                            req.session.num_in_cart = cart.prodInfo.length;
+                        }else{
+                            userInfo.num_in_cart = 0;
+                            req.session.num_in_cart = 0;
+                        }
+                        
                         
                     
                     resolve(userInfo);
@@ -58,6 +63,10 @@ router.get('/sessionInfo',(req,res)=>{
     }else{
         res.status(500).end()
     }
-  
-  })
+})
+router.get('/exit',(req,res)=>{
+    req.session.destroy(function(err) {
+        res.end();
+      })
+})
 module.exports = router;

@@ -17,9 +17,9 @@
                     <button class="dologin">login</button>
                 </div>
             </form>
-            <div class="helper">
+            <!-- <div class="helper">
                 <router-link to="/admin">admin</router-link>
-            </div>
+            </div> -->
         </div>
         </div>
     </div>
