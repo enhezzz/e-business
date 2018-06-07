@@ -12,12 +12,13 @@
                 </div>
             </router-link>
             </div>
-            <div class="page-option">
+            <div class="page-option" v-if="infos.length !=0">
                 <button class="prev-page option" :disabled="!page.prevable" :class="{'no-allowed': !page.prevable}"
                 @click="selectPrev">
                     <
                 </button>
-                <a href="javascript:;" v-for="(pageCode,index) of pageMount" class="option" :data-index="index+1"
+                <a href="javascript:;" v-for="(pageCode,index) of pageMount" class="option"
+                :class="{highLightPage: index+1 == page.currentPage}" :data-index="index+1"
                 @click="selectPage">
                     {{index+1}}
                 </a>
@@ -438,5 +439,9 @@ export default {
 }
 .no-allowed {
   cursor: not-allowed;
+}
+.highLightPage{
+  color: rgb(124, 89, 188);
+  font-weight: 700
 }
 </style>
