@@ -3,7 +3,7 @@
         <div class="center">
             <div class="sider-options">
                 <div class="option">
-                    <router-link to="/personalCenter/baseInfo">个人资料</router-link>
+                    <router-link to="/personalCenter">个人资料</router-link>
                 </div>
                 <div class="option">
                     <router-link to="/personalCenter/receivedAddr">管理收货地址</router-link>
