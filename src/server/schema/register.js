@@ -14,5 +14,9 @@ module.exports = {
     addrs:{
       type: Array,
       default: []
+    },
+    avatarPath: {
+      type: String,
+      default: '/upload/personalInfo/default/default.jpg'
     }
   }
