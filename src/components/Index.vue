@@ -5,25 +5,7 @@
         <h2 class="theme">主题市场</h2>
       <div class="sub">
         <div class="item">
-          <router-link to="1">123</router-link>
-        </div>
-        <div class="item">
-          <router-link to="1">123</router-link>
-        </div>
-        <div class="item">
-          <router-link to="1">123</router-link>
-        </div>
-        <div class="item">
-          <router-link to="1">123</router-link>
-        </div>
-        <div class="item">
-          <router-link to="1">123</router-link>
-        </div>
-        <div class="item">
-          <router-link to="1">123</router-link>
-        </div>
-        <div class="item">
-          <router-link to="1">123</router-link>
+          <router-link to="/productList">商品列表</router-link>
         </div>
       </div>
       </div>
@@ -34,9 +16,9 @@
          <div class="list">
         <div class="type">
           <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
@@ -44,20 +26,9 @@
         </div>
         <div class="type">
           <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
-            <span class="arrow">></span>
-          </div>
-          <div class="detail-title">
-
-          </div>
-        </div>
-        <div class="type">
-          <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
@@ -66,9 +37,9 @@
         </div>
         <div class="type">
           <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
@@ -77,9 +48,9 @@
         </div>
         <div class="type">
           <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
@@ -88,9 +59,9 @@
         </div>
         <div class="type">
           <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
@@ -99,9 +70,9 @@
         </div>
         <div class="type">
           <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
@@ -110,9 +81,9 @@
         </div>
         <div class="type">
           <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
@@ -121,9 +92,9 @@
         </div>
         <div class="type">
           <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
@@ -132,9 +103,9 @@
         </div>
         <div class="type">
           <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
@@ -143,9 +114,9 @@
         </div>
         <div class="type">
           <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
@@ -154,9 +125,9 @@
         </div>
         <div class="type">
           <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
@@ -165,9 +136,9 @@
         </div>
         <div class="type">
           <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
@@ -176,9 +147,9 @@
         </div>
         <div class="type">
           <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
@@ -187,9 +158,9 @@
         </div>
         <div class="type">
           <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
@@ -198,9 +169,20 @@
         </div>
         <div class="type">
           <div class="main-title">
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>/
-            <router-link to="1">男装</router-link>
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
+            <span class="arrow">></span>
+          </div>
+          <div class="detail-title">
+
+          </div>
+        </div>
+        <div class="type">
+          <div class="main-title">
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>/
+            <router-link to="/">隔离带</router-link>
             <span class="arrow">></span>
           </div>
           <div class="detail-title">
@@ -213,6 +195,12 @@
         <div class="advantages">
           <div class="carousel">
             <div class="items">
+              <a href="#" class="prod">
+              <img src="../assets/carousel1.png" alt="">
+              </a>
+              <a href="#" class="prod">
+              <img src="../assets/carousel1.png" alt="">
+              </a>
               <a href="#" class="prod">
               <img src="../assets/carousel1.png" alt="">
               </a>
@@ -232,15 +220,18 @@
         </div>
         <div class="info">
           <div class="my-info">
-            <div class="avatar"></div>
+            <div class="avatar">
+              <img :src="avatarPath" alt="">
+            </div>
             <div class="action">
-              <router-link to="login">登陆</router-link>
-              <router-link to="regist">注册</router-link>
+              <router-link to="login" v-if="!isLogin">登陆</router-link>
+              <router-link to="register" v-if="!isLogin">注册</router-link>
+              <router-link to="/personalCenter" v-if="isLogin">个人中心</router-link>
             </div>
           </div>
           <div class="news">
             <div class="title">
-              news:
+              上新:
             </div>
             <div class="prods">
               <ul>
@@ -263,10 +254,16 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
-      news: []
-    };
+      news: [],
+      avatarPath: "",
+    }
   },
+  computed: {
+    isLogin(){
+      return this.$store.state.isLogin;
+    }
+  }
+  ,
   created: function(){
     if(fetch){
       fetch('/newProds',{
@@ -277,8 +274,97 @@ export default {
         this.news = news
       }).catch(err=>{
         if(err) throw err;
+      });
+      fetch('/getInfo',{
+        credentials: 'same-origin'
+      }).then(response=>{
+        return response.text()
+      }).then(avatarPath=>{
+        this.avatarPath = avatarPath;
+      }).catch(err=>{
+        if(err) throw err;
       })
     }
+  },
+  mounted(){
+    var container = document.querySelector('.carousel');
+    var slider = document.querySelector('.items');
+    var leftArrow = document.querySelector('.left-controler');
+    var rightArrow = document.querySelector('.right-controler');
+    var circleControlers = document.querySelectorAll('.main-controlers>.item');
+    this.carousel(container,slider,leftArrow,rightArrow,circleControlers)
+  },
+  methods:{
+    carousel(container,slider,leftArrow,rightArrow,circleControlers){
+    let picIndex = 0;
+    let timer = null;
+    let containerWidth = parseInt(window.getComputedStyle(container,null).width || container.currentStyle.width)
+    // console.log(container,slider,leftArrow,rightArrow,circleControlers)
+    let circleControlersLength = circleControlers.length;
+    timer = setInterval(function () {
+        if (picIndex > circleControlersLength-1) {
+            picIndex = 0;
+        }
+        slider.style.left = -picIndex * containerWidth + 'px';
+        circleControlers.forEach((controler) => {
+            controler.classList.remove('active');
+        })
+        circleControlers[picIndex].classList.add('active')
+        picIndex++;
+        // console.log(picIndex > 4)
+        // console.log(picIndex)
+    }, 2000);
+    container.onmouseenter = function () {
+        clearInterval(timer);
+    }
+    container.onmouseleave = function () {
+        timer = setInterval(function () {
+            if (picIndex > circleControlersLength-1) {
+                picIndex = 0;
+            }
+            slider.style.left = -picIndex * containerWidth + 'px';
+            circleControlers.forEach((controler) => {
+                controler.classList.remove('active');
+            })
+            circleControlers[picIndex].classList.add('active')
+            picIndex++;
+            // console.log(picIndex > 4)
+            // console.log(picIndex)
+        }, 2000);
+    }
+    leftArrow.onclick = function () {
+        picIndex--;
+        if (picIndex < 0)
+            picIndex = circleControlersLength-1;
+        console.log(picIndex)
+        slider.style.left = -picIndex * containerWidth + 'px';
+        circleControlers.forEach((controler) => {
+            controler.classList.remove('active');
+        })
+        circleControlers[picIndex].classList.add('active')
+    }
+    rightArrow.onclick = function () {
+        picIndex++;
+        if (picIndex > circleControlersLength-1)
+            picIndex = 0;
+        slider.style.left = -picIndex * containerWidth + 'px';
+        circleControlers.forEach((controler) => {
+            controler.classList.remove('active');
+        })
+        circleControlers[picIndex].classList.add('active')
+    }
+    circleControlers.forEach((controler, index) => {
+        controler.onclick = function () {
+            picIndex = index;
+            slider.style.left = -picIndex * containerWidth + 'px';
+            circleControlers.forEach((controler) => {
+                controler.classList.remove('active');
+            })
+            circleControlers[picIndex].classList.add('active')
+        }
+    })
+}
+
   }
 };
 </script>
@@ -357,11 +443,20 @@ export default {
 .category .detail .hot .advantages .carousel{
   height: 100%;
   position: relative;
+  width: 745px;
+  overflow: hidden;
+}
+.category .detail .hot .advantages .carousel>.items{
+  width: 2235px;
+  position: absolute;
+  left: 0;
+  transition: left .4s
 }
 .category .detail .hot .advantages .carousel .prod{
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
-  display: block
+  display: block;
+  float: left;
 }
 .category .detail .hot .advantages .carousel .main-controlers{
   position: absolute;
@@ -377,11 +472,21 @@ export default {
   height: 12px;
   border-radius: 50%;
   margin: 5px;
+  background: rgb(233, 233, 233);
+}
+.category .detail .hot .advantages .carousel .main-controlers .item.active{
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin: 5px;
   background: #fff;
 }
 .category .detail .hot .advantages .carousel .left-controler{
   width: 36px;
   height: 36px;
+  line-height: 36px;
+  text-align: center;
   border-radius: 0 50% 50% 0;
   background: rgba(188, 188, 188, .4);
   position: absolute;
@@ -393,6 +498,8 @@ export default {
 .category .detail .hot .advantages .carousel .right-controler{
   width: 36px;
   height: 36px;
+  line-height: 36px;
+  text-align: center;
   border-radius: 50% 0 0 50%;
   background: rgba(188, 188, 188, .4);
   position: absolute;
@@ -404,6 +511,7 @@ export default {
 .category .detail .hot .advantages .carousel:hover .right-controler,
 .category .detail .hot .advantages .carousel:hover .left-controler{
   display: block;
+  cursor: default;
 }
 .category .detail .hot .info{
   flex: 1;
@@ -417,7 +525,12 @@ export default {
   height: 60px;
   margin: 0 auto;
   border-radius: 50%;
-  border: 1px solid #eee
+  border: 1px solid #eee;
+  overflow: hidden;
+}
+.category .detail .hot .info .my-info .avatar>img{
+  width: 100%;
+  height: 100%;
 }
 .category .detail .hot .info .my-info .action{
   display: flex;
@@ -435,4 +548,30 @@ export default {
   font-weight: 700;
   color: #fff
 }
+.category .detail .hot .info .news .title{
+    margin-top: 15px;
+}
+.category .detail .hot .info .prods li{
+    height: 29px;
+    line-height: 29px;
+}
+.category .detail .hot .info .prods li:nth-of-type(1)>a{
+    color: rgb(211, 144, 233);
+}
+.category .detail .hot .info .prods li:nth-of-type(2)>a{
+    color: rgb(211, 144, 233);
+}
+.category .detail .hot .info .prods li:nth-of-type(3)>a{
+    color: rgb(211, 144, 233);
+}
+
+.category .detail .hot .info .prods li>a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.category .detail .hot .info .prods li>a:hover{
+    background: rgb(235, 235, 235);
+}
+
 </style>
