@@ -9,11 +9,19 @@ router.post('/register',(req,res)=>{
     form.parse(req, function(err, fields, files) {
       fields.auth = 0;
       let user = new model(fields);
-      user.save(function(){
-        console.log('register succeed')
-      })
+      model.findOne({username: fields.username}).exec((err,user)=>{
+        if(!user){
+          user.save(function(){
+            console.log('register succeed');
+            res.status(200);
+            res.end()
+          })
+        }else{
+          res.status(500).end()
+        }
+      });
+    
     });
-    res.status(200);
-    res.end()
+    
 })
 module.exports = router;

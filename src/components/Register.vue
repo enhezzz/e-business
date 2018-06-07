@@ -44,6 +44,9 @@ export default {
       xhr.onreadystatechange = function() {
         if (xhr.status == 200 && xhr.readyState == 4) {
           alert("succeed");
+          this.$router.push('/');
+        }else if(xhr.status == 500 && xhr.readyState == 4){
+          alert('该用户已存在')
         }
       };
     }
