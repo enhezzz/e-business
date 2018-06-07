@@ -2,20 +2,16 @@
 
 > a sale website
 
-## Build Setup
+###  1. 首先安装依赖
 
 ``` bash
-# install dependencies
+//运行下面命令
 npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
+### 2.配置数据库存储路径
+在package.json中scripts字段下修改db字段的--dbpath参数为你指定的数据库资源存储目录。
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### 3.运行以下命令启动项目
+```
+npm run prod
+```
