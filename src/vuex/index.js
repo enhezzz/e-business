@@ -38,6 +38,9 @@ export default new Vuex.Store({
         turnToLogin(state){
             state.isLogin = true;
         },
+        exit(state){
+            state.isLogin = false;
+        },
         add_num_in_cart(state){
             state.num_in_cart++;
         },

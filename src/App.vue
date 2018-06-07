@@ -5,34 +5,35 @@
         <div class="nav clearfix">
             <div class="nav-left">
             <div class="item">
-              <router-link to="/login" class="active">{{personalInfo.id}}</router-link>
-              <div class="simple-info">
+              <router-link to="/login" :class="{hidden: isLogin}">登陆</router-link>
+              <router-link to="/personalCenter" class="active" :class="{hidden: !isLogin}">{{personalInfo.id}}</router-link>
+              <!-- <div class="simple-info">
                 <div class="avatar"></div>
                 <div class="setup"></div>
-              </div>
+              </div> -->
               </div>
             <div class="item">
               <router-link to="/register" :class="{hidden: isLogin}">注册</router-link>
-              <router-link to="/exit" :class="{hidden: !isLogin}">退出</router-link>
+              <a href="javascript:;" :class="{hidden: !isLogin}" @click="exit">退出</a>
               </div>
           </div>
           <div class="nav-right">
             <div class="item">
-              <router-link :to="{name: 'personalCenter'}">
+              <router-link to="/personalCenter">
                 我的center
               </router-link>
             </div>
             <div class="item">
-              <router-link to="2" class="cart">
+              <router-link to="/product/cart" class="cart">
                 <span>订单</span>
                 <div class="num-in-cart" v-if="personalInfo.num_in_cart">
                   {{personalInfo.num_in_cart}}
                 </div>
               </router-link>
             </div>
-            <div class="item">
-              <router-link to="3">
-                收藏
+            <div class="item" v-if="personalInfo.auth == 1">
+              <router-link to="/admin">
+                管理
               </router-link>
             </div>
           </div>
@@ -52,7 +53,7 @@
               <button>搜索</button>
             </form>
           </div>
-          <div class="hot">
+          <!-- <div class="hot">
             <div class="keywords">
               <router-link to="1">1123</router-link>
               <router-link to="1">2123</router-link>
@@ -61,7 +62,7 @@
             <div class="more">
               <router-link to="more">more>></router-link>
             </div>
-          </div>
+          </div> -->
         </div>
         </div>
       </div>
@@ -78,18 +79,33 @@
         <div class="detail"></div>
       </div>
     </footer>
+    <div class="exitMask" :class="{actived: activatedMask}">
+      <div class="ensure-box">
+        <div class="title">退出？！</div>
+        <div class="option">
+          <div class="ok" @click="ensureExit">y</div>
+          <div class="cancle" @click="cancleExit">n</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "App",
+  data: function(){
+    return {
+      activatedMask: false
+    }
+  }
+  ,
   computed: {
     personalInfo: function() {
-      console.log(this.$store.state.id)
       return {
         id: this.$store.state.id,
-        num_in_cart: this.$store.state.num_in_cart
+        num_in_cart: this.$store.state.num_in_cart,
+        auth: this.$store.state.auth
       }
     },
     isLogin(){
@@ -113,6 +129,28 @@ export default {
       //       if (err) throw err;
       //     });
       // }
+    },
+    exit(){
+     this.activatedMask = true
+    },
+    ensureExit(){
+      if(fetch){
+        let exitRequest = new Request('/exit');
+        fetch(exitRequest,{
+          credentials: 'same-origin'
+        }).then(response=>{
+          this.$store.commit('updateUsername','登陆');
+          this.$store.commit('exit');
+          this.$store.commit('update_num_in_cart',undefined);
+
+        }).catch(err=>{
+
+        })
+      }
+      this.activatedMask = false
+    },
+    cancleExit(){
+      this.activatedMask = false
     }
   }
 };
@@ -283,6 +321,53 @@ a {
 }
 .header .detail .search-bar .hot .more {
   float: right;
+}
+.exitMask{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(182, 155, 155, .4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.exitMask.actived{
+  display: flex;
+}
+.exitMask>.ensure-box{
+  width: 400px;
+  height: 200px;
+  padding: 10px;
+  background: rgb(233, 233, 233);
+  border-radius: 5px;
+
+}
+.exitMask>.ensure-box>.title{
+  height: 40px;
+  line-height: 40px;  
+  border-bottom: 1px solid rgb(212, 212,212)
+}
+.exitMask>.ensure-box>.option{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 60px;
+}
+.exitMask>.ensure-box>.option>.ok,
+.exitMask>.ensure-box>.option>.cancle{
+  width: 50px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid rgb(212, 212,212)
+}
+.exitMask>.ensure-box>.option>.cancle{
+  background: rgb(211, 188, 234);
+  color: #fff
 }
 /* .container {
   padding: 0 5%;
